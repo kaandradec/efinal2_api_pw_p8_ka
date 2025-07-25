@@ -2,10 +2,11 @@ package com.uce.edu.api.controller;
 
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 
-import com.uce.edu.api.repository.model.Doctor;
-import com.uce.edu.api.service.IDoctorService;
-import com.uce.edu.api.service.mappers.DoctorMapper;
-import com.uce.edu.api.service.to.DoctorTo;
+import com.uce.edu.api.repository.model.Paciente;
+import com.uce.edu.api.service.IPacienteService;
+import com.uce.edu.api.service.mappers.PacienteMapper;
+import com.uce.edu.api.service.to.PacienteTo;
+
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -16,11 +17,11 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-@Path("/doctores")
-public class DoctorController {
+@Path("/pacientes")
+public class PacienteController {
 
     @Inject
-    private IDoctorService iDoctorService;
+    private IPacienteService iPacienteService;
 
     @GET
     @Path("/{cedula}")
@@ -28,8 +29,8 @@ public class DoctorController {
     public Response obtenerPorCedula(@PathParam("cedula") String cedula) {
 
         try {
-            Doctor doctor = this.iDoctorService.buscarPorCedula(cedula);
-            return Response.status(Response.Status.OK).entity(DoctorMapper.toTo(doctor)).build();
+            Paciente paciente = this.iPacienteService.buscarPorCedula(cedula);
+            return Response.status(Response.Status.OK).entity(paciente).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
@@ -39,10 +40,10 @@ public class DoctorController {
     @POST
     @Path("")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response guardar(@RequestBody DoctorTo doctorTo) {
+    public Response guardar(@RequestBody PacienteTo pacienteTo) {
 
         try {
-            this.iDoctorService.guardar(DoctorMapper.toEntity(doctorTo));
+            this.iPacienteService.guardar(PacienteMapper.toEntity(pacienteTo));
             return Response.status(Response.Status.CREATED).build();
         } catch (Exception e) {
             e.printStackTrace();

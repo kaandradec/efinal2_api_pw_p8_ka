@@ -13,22 +13,22 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "doctor")
-public class Doctor {
+@Table(name = "paciente")
+public class Paciente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "doct_id")
+    @Column(name = "paci_id")
     private Integer id;
-    @Column(name = "doct_cedula")
+    @Column(name = "paci_cedula")
     private String cedula;
-    @Column(name = "doct_nombre")
+    @Column(name = "paci_nombre")
     private String nombre;
-    @Column(name = "doct_apellido")
+    @Column(name = "paci_apellido")
     private String apellido;
-    @Column(name = "doct_genero")
-    private String genero;
+    @Column(name = "paci_fecha_nacimiento")
+    private String fechaNacimiento;
 
-    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Cita> citas;
 
     public Integer getId() {
@@ -37,14 +37,6 @@ public class Doctor {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
     }
 
     public String getNombre() {
@@ -63,12 +55,12 @@ public class Doctor {
         this.apellido = apellido;
     }
 
-    public String getGenero() {
-        return genero;
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
-    public void setGenero(String genero) {
-        this.genero = genero;
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public List<Cita> getCitas() {
@@ -78,5 +70,15 @@ public class Doctor {
     public void setCitas(List<Cita> citas) {
         this.citas = citas;
     }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
+    
 
 }
